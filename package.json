@@ -1,0 +1,23 @@
+{
+  "name": "jobportal",
+  "version": "1.0.0",
+  "description": "[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/saqlainab11/jobportal)",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saqlainab11/jobportal.git"
+  },
+  "author": "Saqlain",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/saqlainab11/jobportal/issues"
+  },
+  "homepage": "https://github.com/saqlainab11/jobportal#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "joi": "^17.2.0"
+  }
+}
