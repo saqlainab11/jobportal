@@ -4,7 +4,7 @@
   "description": "[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/saqlainab11/jobportal)",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
@@ -20,5 +20,8 @@
     "express": "^4.17.1",
     "joi": "^17.2.0",
     "mongoose": "^5.9.27"
+  },
+  "engines": {
+    "node": "12.x"
   }
 }
