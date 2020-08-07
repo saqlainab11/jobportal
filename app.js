@@ -70,19 +70,19 @@ app.get('/', (req, res) => {
 '\t\t\t<td>description</td>\n' +
 '\t\t</tr>\n' +
 '\t\t<tr>\n' +
-'\t\t\t<td>/api/job</td>\n' +
+'\t\t\t<td>/api/jobs</td>\n' +
 '\t\t\t<td>GET</td>\n' +
 '\t\t\t<td>&nbsp;</td>\n' +
 '\t\t\t<td>fetch all jobs</td>\n' +
 '\t\t</tr>\n' +
 '\t\t<tr>\n' +
-'\t\t\t<td>/api/job/1</td>\n' +
+'\t\t\t<td>/api/jobs/1</td>\n' +
 '\t\t\t<td>GET</td>\n' +
 '\t\t\t<td>ID</td>\n' +
 '\t\t\t<td>fetch job with id number 1</td>\n' +
 '\t\t</tr>\n' +
 '\t\t<tr>\n' +
-'\t\t\t<td>/api/job</td>\n' +
+'\t\t\t<td>/api/jobs</td>\n' +
 '\t\t\t<td>POST</td>\n' +
 '\t\t\t<td>\n' +
 '\t\t\t<p>title,company, shift, salary_range</p>\n' +
@@ -92,13 +92,13 @@ app.get('/', (req, res) => {
 '\t\t\t<td>to add new job with fields</td>\n' +
 '\t\t</tr>\n' +
 '\t\t<tr>\n' +
-'\t\t\t<td>/api/job/1</td>\n' +
+'\t\t\t<td>/api/jobs/1</td>\n' +
 '\t\t\t<td>PUT</td>\n' +
 '\t\t\t<td>id</td>\n' +
 '\t\t\t<td>update a job on the basis of id</td>\n' +
 '\t\t</tr>\n' +
 '\t\t<tr>\n' +
-'\t\t\t<td>/api/job/1</td>\n' +
+'\t\t\t<td>/api/jobs/1</td>\n' +
 '\t\t\t<td>DELETE</td>\n' +
 '\t\t\t<td>id</td>\n' +
 '\t\t\t<td>delete job record on the basis of id</td>\n' +
