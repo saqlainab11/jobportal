@@ -27,30 +27,15 @@ var JobSchema = new Schema({
 
 });
 
-// var Job = mongoose.model('Jobs', JobSchema);
-// const doc = new Job();
-// doc._id = 2;
-// doc.title='Node Developer';
-// doc.company='CCT College';
-// doc.shift='morning';
-// doc.salary_range='100-150'; 
-//  doc.save((err,result)=>{
-//      if(err) console.log(err);
-//      console.log(result);
-//  }); // works
+
 
 var Job = mongoose.model('Jobs', JobSchema);
 
 
-const jobs = [
-    { title: 'Node Js Developers', id: 1 },
-    { title: 'MERN Stack Developer', id: 2 },
-    { title: 'FULL Stack Developer', id: 3 }
-]
-
 //READ Request Handlers
 app.get('/', (req, res) => {
-    res.send('Welcome to JobPortal REST API with Node.js');
+    // res.send('Welcome to JobPortal REST API with Node.js');
+    res.send('<h1>this is heading 1</h1>')
 });
 
 app.get('/api/jobs', (req, res) => {
