@@ -2,10 +2,13 @@ const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
 app.use(express.json());
+var dotenv = require('dotenv');
+dotenv.config();
+const url = process.env.MONGOLAB_URI
 
-
-const uri = "mongodb+srv://saqlain_db_user:Abcdef1214@cluster0.gmrkf.gcp.mongodb.net/<dbname>?retryWrites=true&w=majority";
-mongoose.connect(uri, {
+// console.log(url);
+// const uri = "mongodb+srv://saqlain_db_user:Abcdef1214@cluster0.gmrkf.gcp.mongodb.net/<dbname>?retryWrites=true&w=majority";
+mongoose.connect(url, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
@@ -34,8 +37,7 @@ var Job = mongoose.model('Jobs', JobSchema);
 
 //READ Request Handlers
 app.get('/', (req, res) => {
-    // res.send('Welcome to JobPortal REST API with Node.js');
-    res.send('<h1>this is heading 1</h1>')
+    res.send('Welcome to JobPortal REST API with Node.js');
 });
 
 app.get('/api/jobs', (req, res) => {
