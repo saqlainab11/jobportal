@@ -6,8 +6,6 @@ var dotenv = require('dotenv');
 dotenv.config();
 const url = process.env.MONGOLAB_URI
 
-// console.log(url);
-// const uri = "mongodb+srv://saqlain_db_user:Abcdef1214@cluster0.gmrkf.gcp.mongodb.net/<dbname>?retryWrites=true&w=majority";
 mongoose.connect(url, {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -23,11 +21,10 @@ var Schema = mongoose.Schema;
 
 var JobSchema = new Schema({
     _id: Number,
-    title: String, // String is shorthand for {type: String}
+    title: String, 
     company: String,
     shift: String,
     salary_range: String,
-
 });
 
 
