@@ -18,6 +18,7 @@
   "homepage": "https://github.com/saqlainab11/jobportal#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "joi": "^17.2.0"
+    "joi": "^17.2.0",
+    "mongoose": "^5.9.27"
   }
 }

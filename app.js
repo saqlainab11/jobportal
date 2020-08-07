@@ -1,7 +1,45 @@
 const express = require('express');
-const Joi = require('joi'); //used for validation
+const mongoose = require('mongoose');
 const app = express();
 app.use(express.json());
+
+
+const uri = "mongodb+srv://saqlain_db_user:Abcdef1214@cluster0.gmrkf.gcp.mongodb.net/<dbname>?retryWrites=true&w=majority";
+mongoose.connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
+    .then(() => {
+        console.log("MongoDB Connected");
+    })
+    .catch(err => console.log(err))
+
+
+
+var Schema = mongoose.Schema;
+
+var JobSchema = new Schema({
+    _id: Number,
+    title: String, // String is shorthand for {type: String}
+    company: String,
+    shift: String,
+    salary_range: String,
+
+});
+
+// var Job = mongoose.model('Jobs', JobSchema);
+// const doc = new Job();
+// doc._id = 2;
+// doc.title='Node Developer';
+// doc.company='CCT College';
+// doc.shift='morning';
+// doc.salary_range='100-150'; 
+//  doc.save((err,result)=>{
+//      if(err) console.log(err);
+//      console.log(result);
+//  }); // works
+
+var Job = mongoose.model('Jobs', JobSchema);
 
 
 const jobs = [
@@ -16,38 +54,73 @@ app.get('/', (req, res) => {
 });
 
 app.get('/api/jobs', (req, res) => {
-    res.send(jobs);
+    Job.find((err, document) => {
+        if (err) res.status(404).send('<h2 style="font-family: Malgun Gothic; color: darkred;">Ooops... Cant find what you are looking for!</h2>');
+        res.send(document);
+    })
 });
 
 app.get('/api/jobs/:id', (req, res) => {
-    const job = jobs.find(c => c.id === parseInt(req.params.id));
-
-    if (!job) res.status(404).send('<h2 style="font-family: Malgun Gothic; color: darkred;">Ooops... Cant find what you are looking for!</h2>');
-    res.send(job);
+    Job.find({ _id: req.params.id }, (err, document) => {
+        if (err) res.status(404).send('<h2 style="font-family: Malgun Gothic; color: darkred;">Ooops... Cant find what you are looking for!</h2>');
+        res.send(document);
+    })
 });
 
 
 //CREATE Request Handler
 app.post('/api/jobs', (req, res) => {
-    const job = {
-        id: jobs.length + 1,
-        title: req.body.title
-    };
-    jobs.push(job);
-    res.send(job);
+    Job.find((err, document) => {
+        if (err) {
+            res.send({ statsu: false, error: err });
+        } else {
+            let nextId = 0;
+            document.forEach(item => {
+                if (item._id > nextId) {
+                    nextId = item._id;
+                }
+            })
+
+            const doc = new Job();
+            doc._id = nextId + 1;
+            doc.title = req.body.title;
+            doc.company = req.body.company;
+            doc.shift = req.body.shift;
+            doc.salary_range = req.body.salary_range;
+
+            doc.save((err, result) => {
+                if (err) {
+                    res.send({ statsu: false, error: err });
+                }
+                res.send(result);
+            });
+        }
+
+    })
 });
 
 
 //UPDATE Request Handler
 app.put('/api/jobs/:id', (req, res) => {
-    const job = jobs.find(c => c.id === parseInt(req.params.id));
-    if (!job) res.status(404).send('<h2 style="font-family: Malgun Gothic; color: darkred;">Not Found!! </h2>');
+    let query = {
+        _id: req.params.id
+    };
+    let fieldsToUpdate = {
+        company: req.body.company,
+        title: req.body.title,
+        shift: req.body.shift,
+        salary_range: req.body.salary_range
+    }
+
+    Job.updateOne(query, fieldsToUpdate, (err, result) => {
+        if (err) {
+            res.send({ statsu: false, error: err });
+        } else {
+            res.send({ status: true });
+        }
+    })
 
 
-    // console.log(req.body)
-    // console.log(jobs)
-    job.title = req.body.title;
-    res.send(job);
 });
 
 
@@ -55,13 +128,19 @@ app.put('/api/jobs/:id', (req, res) => {
 //DELETE Request Handler
 app.delete('/api/jobs/:id', (req, res) => {
 
-    const job = jobs.find(c => c.id === parseInt(req.params.id));
-    if (!job) res.status(404).send('<h2 style="font-family: Malgun Gothic; color: darkred;"> Not Found!! </h2>');
+    let query = {
+        _id: req.params.id
+    }
 
-    const index = jobs.indexOf(job);
-    jobs.splice(index, 1);
+    Job.deleteOne(query, (err, result) => {
+        if (err) {
+            res.send({ statsu: false, error: err });
+        } else {
+            res.send({ status: true });
+        }
 
-    res.send(job);
+    })
+
 });
 
 
