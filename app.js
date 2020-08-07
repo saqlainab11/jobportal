@@ -2,9 +2,15 @@ const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
 app.use(express.json());
-var dotenv = require('dotenv');
-dotenv.config();
-const url = process.env.MONGOLAB_URI
+
+var url='';
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config()
+    dotenv.config();
+     url = process.env.MONGOLAB_URI
+}else {
+    url= process.env.MONGOLAB_URI;
+}
 
 mongoose.connect(url, {
     useNewUrlParser: true,
