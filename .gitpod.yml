@@ -2,5 +2,8 @@ image:
   file: .gitpod.Dockerfile
 
 tasks:
-  - init: 'echo "TODO: Replace with init/build command"'
+  - init: npm install
     command: npm start
+ports:
+  - port: 8000
+    onOpen: open-preview
