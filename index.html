@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Job Portal</title>
+
+    <script>
+        const doFunction=()=>{
+            // console.log('button clicked')
+            // alert('button clicked')
+            fetch('https://8080-c61aeca6-7a49-4e0b-8983-c5a418f9366a.ws-eu01.gitpod.io/api/jobs/2',{
+            method: "GET",
+            headers: {
+                'Accept': 'application/json',
+                // 'Authorization': 'Bearer token',
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            // body: formData,
+        })
+            .then(res=>{
+                console.log(res)
+                alert(JSON.stringify(res))
+            })
+            .catch(err=>alert(err))
+        }
+    </script>
+</head>
+
+<body>
+	<div class="ui container">
+		<div>
+			<div class="header item">
+				Job Portal
+			</div>
+            <div>
+                <input id="get all jobs" type="button" value="clickme" onclick="doFunction();" />
+            </div>
+
+
+
+		</div>
+		<div id="app"></div>
+	</div>
+
+
+</body>
+
+</html>
